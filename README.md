@@ -18,6 +18,58 @@
 
 You may contribute to this project by opening an issue or creating a pull request on GitHub. Fell free to help the actual code, or just give me advice on how to improve the code.
 
+## 🔥 | Running
+
+To run Amandinha, you need to have [Docker](https://www.docker.com/) in your machine. You have two options of installation, follow the one that applies to you.
+
+### 🔮 | Building the Image
+
+> If you want to build the image yourself, you can do it by following these steps:
+
+1. 🧹 Clone the repository
+
+```bash
+git clone https://github.com/MenheraBot/Amandinha.git
+```
+
+2. 💻 Building the Image
+
+```bash
+docker build . --tag amandinha
+```
+
+3. 🏃‍♂️ Running a Container
+
+```bash
+docker run --name AmandinhaBot -e "TOKEN=ReplaceWithToken" -d -t amandinha
+```
+
+> Obs: you need to add the Bot Token in `ReplaceWithToken`. Don't have a token? Follow [Discord's Tutorial](https://discord.com/developers/docs/getting-started).
+
+That's It! Amandinha is now running in a container OwO.
+
+### 🎉 | Downloading the Image
+
+> If you don't really want all the source code, and just want to execute the bot, you can just donwload the image from the Container Registry.
+
+1. 📥 Download the image
+
+```bash
+docker pull ghcr.io/menherabot/amandinha:latest
+```
+
+> You need to be [logged in](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry)
+
+2. 🏃‍♂️ Running a Container
+
+```bash
+docker run --name AmandinhaBot -e "TOKEN=ReplaceWithToken" -d -t ghcr.io/menherabot/amandinha:latest
+```
+
+> Obs: you need to add the Bot Token in `ReplaceWithToken`. Don't have a token? Follow [Discord's Tutorial](https://discord.com/developers/docs/getting-started).
+
+Less go! Amandinha is now running in a container OwO.
+
 ## 🔨 | Made With
 
 - [JDA](https://github.com/DV8FromTheWorld/JDA)

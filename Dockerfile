@@ -11,6 +11,5 @@ FROM openjdk:16-alpine3.13
 WORKDIR /home/app
 
 COPY --from=build /home/app/target/Amandinha.jar Amandinha.jar
-COPY .env .env
 
 ENTRYPOINT ["java", "-jar", "/home/app/Amandinha.jar"]

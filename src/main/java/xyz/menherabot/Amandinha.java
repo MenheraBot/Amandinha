@@ -29,14 +29,9 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Nonnull;
 import javax.security.auth.login.LoginException;
 
-import io.github.cdimascio.dotenv.Dotenv;
-
 public class Amandinha extends ListenerAdapter {
     public static void main(String[] args) throws LoginException {
-
-        Dotenv dotenv = Dotenv.load();
-
-        JDABuilder.createLight(dotenv.get("TOKEN"), EnumSet.noneOf(GatewayIntent.class))
+        JDABuilder.createLight(System.getenv("TOKEN"), EnumSet.noneOf(GatewayIntent.class))
                 .setStatus(OnlineStatus.ONLINE)
                 .setActivity(Activity.playing("Averiguando meu Servidor de suporte"))
                 .enableIntents(EnumSet.of(GatewayIntent.GUILD_MESSAGES))
