@@ -69,30 +69,39 @@ public class Amandinha extends ListenerAdapter {
             case "OK": {
                 TextChannel channel = e.getGuild().getTextChannelById(Constants.ACCEPTED_CHANNEL);
                 MessageEmbed oldEmbed = e.getMessage().getEmbeds().get(0);
-                MessageEmbed newEmbed = new EmbedBuilder()
+                EmbedBuilder newEmbed = new EmbedBuilder()
                         .setTitle("Sugestão aceita!")
                         .setColor(Color.GREEN)
-                        .setThumbnail(oldEmbed.getThumbnail().getUrl())
                         .setFooter(oldEmbed.getFooter().getText())
-                        .setAuthor(oldEmbed.getAuthor().getName(), oldEmbed.getAuthor().getIconUrl())
-                        .setDescription(oldEmbed.getDescription()).build();
+                        .setDescription(oldEmbed.getDescription());
 
-                channel.sendMessageEmbeds(newEmbed).queue();
+                if(oldEmbed.getThumbnail() != null && oldEmbed.getThumbnail().getUrl() != null)
+                     newEmbed.setThumbnail(oldEmbed.getThumbnail().getUrl());
+
+                if(oldEmbed.getAuthor() != null && oldEmbed.getAuthor().getName() != null)
+                    newEmbed.setAuthor(oldEmbed.getAuthor().getName(), oldEmbed.getAuthor().getIconUrl());
+
+        
+                channel.sendMessageEmbeds(newEmbed.build()).queue();
                 e.getMessage().delete().queue();
                 break;
             }
             case "FILA": {
                 TextChannel channel = e.getGuild().getTextChannelById(Constants.IN_QUEUE_CHANNEL);
                 MessageEmbed oldEmbed = e.getMessage().getEmbeds().get(0);
-                MessageEmbed newEmbed = new EmbedBuilder()
+                EmbedBuilder newEmbed = new EmbedBuilder()
                         .setTitle("Lux está fazendo esta sugestão!")
                         .setColor(Color.YELLOW)
-                        .setThumbnail(oldEmbed.getThumbnail().getUrl())
                         .setFooter(oldEmbed.getFooter().getText())
-                        .setAuthor(oldEmbed.getAuthor().getName(), oldEmbed.getAuthor().getIconUrl())
-                        .setDescription(oldEmbed.getDescription()).build();
+                        .setDescription(oldEmbed.getDescription());
 
-                channel.sendMessageEmbeds(newEmbed).setActionRow(
+                        if(oldEmbed.getThumbnail() != null && oldEmbed.getThumbnail().getUrl() != null)
+                        newEmbed.setThumbnail(oldEmbed.getThumbnail().getUrl());
+   
+                   if(oldEmbed.getAuthor() != null && oldEmbed.getAuthor().getName() != null)
+                       newEmbed.setAuthor(oldEmbed.getAuthor().getName(), oldEmbed.getAuthor().getIconUrl());
+
+                channel.sendMessageEmbeds(newEmbed.build()).setActionRow(
                     Button.success("OK", "Aceitar")
                         .withEmoji(Emoji.fromUnicode("✅")),
                     Button.danger("NO", "Negar")
@@ -106,10 +115,14 @@ public class Amandinha extends ListenerAdapter {
                 MessageEmbed oldEmbed = e.getMessage().getEmbeds().get(0);
                 EmbedBuilder newEmbed = new EmbedBuilder()
                         .setColor(Color.RED)
-                        .setThumbnail(oldEmbed.getThumbnail().getUrl())
                         .setFooter(oldEmbed.getFooter().getText())
-                        .setAuthor(new StringBuilder("A ").append(oldEmbed.getAuthor().getName()).append(" Foi Negada").toString(), oldEmbed.getAuthor().getIconUrl())
                         .setDescription(oldEmbed.getDescription());
+
+                        if(oldEmbed.getThumbnail() != null && oldEmbed.getThumbnail().getUrl() != null)
+                        newEmbed.setThumbnail(oldEmbed.getThumbnail().getUrl());
+   
+                   if(oldEmbed.getAuthor() != null && oldEmbed.getAuthor().getName() != null)
+                       newEmbed.setAuthor(new StringBuilder("A ").append(oldEmbed.getAuthor().getName()).append(" Foi Negada").toString(), oldEmbed.getAuthor().getIconUrl());
 
                 e.getJDA().addEventListener(new MessageCollector(e.getMessage().getIdLong(), newEmbed));
 
