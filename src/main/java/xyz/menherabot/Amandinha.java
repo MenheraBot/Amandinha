@@ -19,6 +19,9 @@ import xyz.menherabot.commands.BetaCommand;
 import xyz.menherabot.commands.InfoCommand;
 import xyz.menherabot.commands.NotifyCommand;
 import xyz.menherabot.commands.StatusCommand;
+import xyz.menherabot.events.ButtonInteractionModule;
+import xyz.menherabot.events.MessageReceive;
+import xyz.menherabot.events.Ready;
 
 import java.awt.Color;
 import java.time.Instant;
@@ -40,7 +43,10 @@ public class Amandinha extends ListenerAdapter {
                     new BetaCommand(),
                     new NotifyCommand(),
                     new StatusCommand(),
-                    new InfoCommand()
+                    new InfoCommand(),
+                        new Ready(),
+                        new MessageReceive(),
+                        new ButtonInteractionModule()
                 )
                 .build();
     }
