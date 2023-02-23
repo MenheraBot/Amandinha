@@ -44,9 +44,9 @@ public class Amandinha extends ListenerAdapter {
                     new NotifyCommand(),
                     new StatusCommand(),
                     new InfoCommand(),
-                        new Ready(),
-                        new MessageReceive(),
-                        new ButtonInteractionModule()
+                    new Ready(),
+                    new MessageReceive(),
+                    new ButtonInteractionModule()
                 )
                 .build();
     }
