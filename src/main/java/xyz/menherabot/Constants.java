@@ -13,4 +13,5 @@ public class Constants {
   public static final Long NEGATED_CHANNEL = 767924268100354098L;
   public static final Long IN_QUEUE_CHANNEL = 851858636661981205L;
   public static final Long WAITING_CHANNEL = 723765136648830996L;
+  public static final Long ALERTS_CHANNEL = 1081607458612588634L;
 }
