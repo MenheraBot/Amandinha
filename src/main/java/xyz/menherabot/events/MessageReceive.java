@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import xyz.menherabot.Constants;
+import xyz.menherabot.Statuspage;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
@@ -15,8 +16,15 @@ import java.util.concurrent.TimeUnit;
 
 public class MessageReceive extends ListenerAdapter {
     public void onMessageReceived(@Nonnull MessageReceivedEvent e) {
-        if (e.getAuthor().isBot()) return;
         if (!e.isFromGuild()) return;
+
+        if (e.getChannel().getIdLong() == Constants.ALERTS_CHANNEL && e.getMessage().getContentRaw().contains("NOTIFY STATUSPAGE")) {
+            Statuspage.CheckMessage(e.getMessage());
+            e.getMessage().delete().queue();
+            return;
+        } 
+
+        if (e.getAuthor().isBot()) return;
 
         if (e.getMessage().getContentRaw().toLowerCase().startsWith("m!")) {
             String replyMessage = String.format("Oii %s, a Menhera não usa mais comandos de mensagem!\nUse os comandos slash. Eles começam com `/`. Ao digitar, uma janela aparecerá com todos comandos existentes, escolha o que você quer, e parte pro abraço >..<", e.getAuthor().getName());

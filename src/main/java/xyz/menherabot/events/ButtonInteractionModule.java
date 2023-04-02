@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import xyz.menherabot.Constants;
 import xyz.menherabot.MessageCollector;
-
+import xyz.menherabot.Statuspage;
 import javax.annotation.Nonnull;
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +17,18 @@ import java.util.concurrent.TimeUnit;
 public class ButtonInteractionModule extends ListenerAdapter {
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent e) {
         if (e.getUser().getIdLong() != Constants.OWNER_ID) return;
+
+        if (e.getChannel().getIdLong() == Constants.ALERTS_CHANNEL) {
+            String stripped[] = e.getButton().getId().split("-");
+
+            String status = stripped[0];
+            String service = stripped[1];
+
+            e.deferEdit().queue();
+
+            Statuspage.UpdateComponentState(Statuspage.GetComponentId(service), status);
+            return;
+        }
 
         switch(e.getComponentId()){
             case "OK": {
