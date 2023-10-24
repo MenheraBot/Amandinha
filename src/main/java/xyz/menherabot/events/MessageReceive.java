@@ -74,7 +74,7 @@ public class MessageReceive extends ListenerAdapter {
         }
 
         if(content.contains("^^")) {
-            e.getMessage().addReaction("<:eto:782022370231582721>").queue();
+            e.getMessage().addReaction(":eto:782022370231582721").queue();
         }
     }
 }
