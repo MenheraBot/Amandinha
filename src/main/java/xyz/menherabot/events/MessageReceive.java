@@ -72,5 +72,9 @@ public class MessageReceive extends ListenerAdapter {
             ).complete().delete().queueAfter(10, TimeUnit.SECONDS);
             return;
         }
+
+        if(content.contains("^^")) {
+            e.getMessage().addReaction("<:eto:782022370231582721>").queue();
+        }
     }
 }
