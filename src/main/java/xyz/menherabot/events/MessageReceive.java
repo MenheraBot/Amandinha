@@ -77,7 +77,7 @@ public class MessageReceive extends ListenerAdapter {
             Random rand = new Random();
             int randomNumber = rand.nextInt(10) + 1;
 
-            if (randomNumber === 10) {
+            if (randomNumber == 10) {
                 e.getMessage().addReaction(":eto:782022370231582721").queue();
             }
         }
