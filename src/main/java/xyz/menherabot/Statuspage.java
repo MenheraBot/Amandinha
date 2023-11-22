@@ -60,7 +60,7 @@ public class Statuspage {
       return "WEBSITE";
 
     if (messageContent.contains("Orchestrator"))
-      return "ORCHESTRATOR"
+      return "ORCHESTRATOR";
   
     throw new Error("Unknown Service sent by UptimeRobot");
   }
