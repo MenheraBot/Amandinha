@@ -75,9 +75,9 @@ public class MessageReceive extends ListenerAdapter {
 
         if(content.contains("^^")) {
             Random rand = new Random();
-            int randomNumber = rand.nextInt(10) + 1;
+            int randomNumber = rand.nextInt(5) + 1;
 
-            if (randomNumber == 10) {
+            if (randomNumber == 3) {
                 e.getMessage().addReaction(":eto:782022370231582721").queue();
             }
         }

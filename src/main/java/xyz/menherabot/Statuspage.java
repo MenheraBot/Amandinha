@@ -58,6 +58,9 @@ public class Statuspage {
 
     if (messageContent.contains("Website"))
       return "WEBSITE";
+
+    if (messageContent.contains("Orchestrator"))
+      return "ORCHESTRATOR"
   
     throw new Error("Unknown Service sent by UptimeRobot");
   }
