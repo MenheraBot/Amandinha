@@ -50,7 +50,7 @@ public class MessageReceive extends ListenerAdapter {
 
             e.getMessage().delete().queue();
 
-            if (e.getAuthor().getId() != Constants.MENHERA_BOT_ID) {
+            if (e.getAuthor().getIdLong() != Constants.MENHERA_BOT_ID) {
                 e.getChannel().sendMessage(
                         new StringBuilder("Obrigada por me enviar uma sugestão ")
                                 .append(e.getAuthor().getAsMention())
