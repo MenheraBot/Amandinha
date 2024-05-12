@@ -26,7 +26,7 @@ public class MessageReceive extends ListenerAdapter {
 
             if (e.getChannel().getIdLong() == Constants.SUGGEST_CHANNEL) {
 
-            if (e.getAuthor().isBot() && e.getAuthor().getId() != Constants.MENHERA_BOT_ID) return;
+            if (e.getAuthor().isBot() && e.getAuthor().getId() != Long.toString(Constants.MENHERA_BOT_ID)) return;
 
             EmbedBuilder embed = new EmbedBuilder()
                     .setDescription("**"+ e.getMessage().getContentRaw() +"**")
