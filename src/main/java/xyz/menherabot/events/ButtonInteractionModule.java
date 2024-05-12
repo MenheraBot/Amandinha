@@ -16,7 +16,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ButtonInteractionModule extends ListenerAdapter {
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent e) {
-        if (e.getUser().getIdLong() != Constants.OWNER_ID) return;
+        if (e.getUser().getIdLong() != Constants.OWNER_ID)
+            return;
 
         if (e.getChannel().getIdLong() == Constants.ALERTS_CHANNEL) {
             String stripped[] = e.getButton().getId().split("-");
@@ -30,7 +31,7 @@ public class ButtonInteractionModule extends ListenerAdapter {
             return;
         }
 
-        switch(e.getComponentId()){
+        switch (e.getComponentId()) {
             case "OK": {
                 TextChannel channel = e.getGuild().getTextChannelById(Constants.ACCEPTED_CHANNEL);
                 MessageEmbed oldEmbed = e.getMessage().getEmbeds().get(0);
@@ -40,12 +41,11 @@ public class ButtonInteractionModule extends ListenerAdapter {
                         .setFooter(oldEmbed.getFooter().getText())
                         .setDescription(oldEmbed.getDescription());
 
-                if(oldEmbed.getThumbnail() != null && oldEmbed.getThumbnail().getUrl() != null)
+                if (oldEmbed.getThumbnail() != null && oldEmbed.getThumbnail().getUrl() != null)
                     newEmbed.setThumbnail(oldEmbed.getThumbnail().getUrl());
 
-                if(oldEmbed.getAuthor() != null && oldEmbed.getAuthor().getName() != null)
+                if (oldEmbed.getAuthor() != null && oldEmbed.getAuthor().getName() != null)
                     newEmbed.setAuthor(oldEmbed.getAuthor().getName(), oldEmbed.getAuthor().getIconUrl());
-
 
                 channel.sendMessageEmbeds(newEmbed.build()).queue();
                 e.getMessage().delete().queue();
@@ -60,18 +60,18 @@ public class ButtonInteractionModule extends ListenerAdapter {
                         .setFooter(oldEmbed.getFooter().getText())
                         .setDescription(oldEmbed.getDescription());
 
-                if(oldEmbed.getThumbnail() != null && oldEmbed.getThumbnail().getUrl() != null)
+                if (oldEmbed.getThumbnail() != null && oldEmbed.getThumbnail().getUrl() != null)
                     newEmbed.setThumbnail(oldEmbed.getThumbnail().getUrl());
 
-                if(oldEmbed.getAuthor() != null && oldEmbed.getAuthor().getName() != null)
+                if (oldEmbed.getAuthor() != null && oldEmbed.getAuthor().getName() != null)
                     newEmbed.setAuthor(oldEmbed.getAuthor().getName(), oldEmbed.getAuthor().getIconUrl());
 
                 channel.sendMessageEmbeds(newEmbed.build()).setActionRow(
                         net.dv8tion.jda.api.interactions.components.buttons.Button.success("OK", "Aceitar")
                                 .withEmoji(Emoji.fromUnicode("✅")),
                         Button.danger("NO", "Negar")
-                                .withEmoji(Emoji.fromUnicode("❌"))
-                ).queue();
+                                .withEmoji(Emoji.fromUnicode("❌")))
+                        .queue();
 
                 e.getMessage().delete().queue();
                 break;
@@ -83,15 +83,17 @@ public class ButtonInteractionModule extends ListenerAdapter {
                         .setFooter(oldEmbed.getFooter().getText())
                         .setDescription(oldEmbed.getDescription());
 
-                if(oldEmbed.getThumbnail() != null && oldEmbed.getThumbnail().getUrl() != null)
+                if (oldEmbed.getThumbnail() != null && oldEmbed.getThumbnail().getUrl() != null)
                     newEmbed.setThumbnail(oldEmbed.getThumbnail().getUrl());
 
-                if(oldEmbed.getAuthor() != null && oldEmbed.getAuthor().getName() != null)
-                    newEmbed.setAuthor(new StringBuilder("A ").append(oldEmbed.getAuthor().getName()).append(" Foi Negada").toString(), oldEmbed.getAuthor().getIconUrl());
+                if (oldEmbed.getAuthor() != null && oldEmbed.getAuthor().getName() != null)
+                    newEmbed.setAuthor(new StringBuilder("A ").append(oldEmbed.getAuthor().getName())
+                            .append(" Foi Negada").toString(), oldEmbed.getAuthor().getIconUrl());
 
                 e.getJDA().addEventListener(new MessageCollector(e.getMessage().getIdLong(), newEmbed));
 
-                e.reply("Qual o motivo para recusar essa reação?").complete().deleteOriginal().queueAfter(30, TimeUnit.SECONDS);
+                e.reply("Qual o motivo para recusar essa reação?").complete().deleteOriginal().queueAfter(30,
+                        TimeUnit.SECONDS);
                 break;
             }
         }

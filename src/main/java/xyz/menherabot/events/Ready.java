@@ -17,9 +17,9 @@ public class Ready extends ListenerAdapter {
         commands.addCommands(
                 Commands.slash("status", "Escolha entre receber ou não atualizaçõs dos Status da Menhera"),
                 Commands.slash("beta", "Escolha entre receber ou não notificações das atualizações da Beta da Menhera"),
-                Commands.slash("atualizações", "Escolha entre receber ou não notificações de atualizações lançadas da Menhera"),
-                Commands.slash("info", "Informações sobre a Amandinha")
-        );
+                Commands.slash("atualizações",
+                        "Escolha entre receber ou não notificações de atualizações lançadas da Menhera"),
+                Commands.slash("info", "Informações sobre a Amandinha"));
 
         commands.queue();
     }

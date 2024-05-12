@@ -24,15 +24,14 @@ public class Amandinha extends ListenerAdapter {
                 .setActivity(Activity.playing("Averiguando meu Servidor de suporte"))
                 .enableIntents(EnumSet.of(GatewayIntent.GUILD_MESSAGES))
                 .addEventListeners(
-                    new Amandinha(),
-                    new BetaCommand(),
-                    new NotifyCommand(),
-                    new StatusCommand(),
-                    new InfoCommand(),
-                    new Ready(),
-                    new MessageReceive(),
-                    new ButtonInteractionModule()
-                )
+                        new Amandinha(),
+                        new BetaCommand(),
+                        new NotifyCommand(),
+                        new StatusCommand(),
+                        new InfoCommand(),
+                        new Ready(),
+                        new MessageReceive(),
+                        new ButtonInteractionModule())
                 .build();
     }
 }

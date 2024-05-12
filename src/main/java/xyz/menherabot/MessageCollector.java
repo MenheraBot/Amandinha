@@ -17,7 +17,8 @@ public class MessageCollector extends ListenerAdapter {
 
   @Override
   public void onMessageReceived(@Nonnull MessageReceivedEvent e) {
-    if (e.getAuthor().getIdLong() != Constants.OWNER_ID) return;
+    if (e.getAuthor().getIdLong() != Constants.OWNER_ID)
+      return;
 
     e.getJDA().removeEventListener(this);
 
