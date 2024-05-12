@@ -24,26 +24,10 @@ public class MessageReceive extends ListenerAdapter {
             return;
         } 
 
-        if (e.getAuthor().isBot()) return;
+            if (e.getChannel().getIdLong() == Constants.SUGGEST_CHANNEL) {
 
-        String content = e.getMessage().getContentRaw().toLowerCase();
+            if (e.getAuthor().isBot() && e.getAuthor().getId() !== Constants.MENHERA_BOT_ID) return;
 
-        if (content.startsWith("m!")) {
-            String replyMessage = String.format("Oii %s, a Menhera não usa mais comandos de mensagem!\nUse os comandos slash. Eles começam com `/`. Ao digitar, uma janela aparecerá com todos comandos existentes, escolha o que você quer, e parte pro abraço >..<", e.getAuthor().getName());
-            e.getMessage().reply(replyMessage).queue();
-            return;
-        }
-
-        if(content.contains("como") && (content.contains("moeda") || content.contains("estrelinha") || content.contains("dinheiro"))) {
-            e.getMessage()
-                .reply("Você quer saber como ganhar **estrelinhas** :star:, a moeda da Menhera?\nVeja como nessa mensagem -> https://canary.discord.com/channels/717061688460967988/773973549386825759/1093721660001103952")
-                .setActionRow(Button.link("https://discord.com/channels/717061688460967988/773973549386825759/1093721660001103952", "Clique Para ver a Mensagem"))
-                .queue();
-
-            return;
-        }
-        
-        if(e.getChannel().getIdLong() == Constants.SUGGEST_CHANNEL) {
             EmbedBuilder embed = new EmbedBuilder()
                     .setDescription("**"+ e.getMessage().getContentRaw() +"**")
                     .setColor(new Color(new Random().nextInt(0xffffff + 1)))
@@ -70,6 +54,25 @@ public class MessageReceive extends ListenerAdapter {
                             .append("! Minha dona já possui conhecimento dela, e vai averiguar o mais rápido possível. Beijinhos >.<")
                             .toString()
             ).complete().delete().queueAfter(10, TimeUnit.SECONDS);
+            return;
+        }
+
+        if (e.getAuthor().isBot()) return;
+
+        String content = e.getMessage().getContentRaw().toLowerCase();
+
+        if (content.startsWith("m!")) {
+            String replyMessage = String.format("Oii %s, a Menhera não usa mais comandos de mensagem!\nUse os comandos slash. Eles começam com `/`. Ao digitar, uma janela aparecerá com todos comandos existentes, escolha o que você quer, e parte pro abraço >..<", e.getAuthor().getName());
+            e.getMessage().reply(replyMessage).queue();
+            return;
+        }
+
+        if(content.contains("como") && (content.contains("moeda") || content.contains("estrel") || content.contains("dinheiro"))) {
+            e.getMessage()
+                .reply("Você quer saber como ganhar **estrelinhas** :star:, a moeda da Menhera?\nVeja como nessa mensagem -> https://canary.discord.com/channels/717061688460967988/773973549386825759/1093721660001103952")
+                .setActionRow(Button.link("https://discord.com/channels/717061688460967988/773973549386825759/1093721660001103952", "Clique Para ver a Mensagem"))
+                .queue();
+
             return;
         }
 

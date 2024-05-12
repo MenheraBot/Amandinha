@@ -3,6 +3,7 @@ package xyz.menherabot;
 public class Constants {
   public static final Long OWNER_ID = 435228312214962204L;
   public static final Long GUILD_ID = 717061688460967988L;
+  public static final Long MENHERA_BOT_ID = 708014856711962654L;
 
   public static final Long BETA_ROLE = 852196704211042336L;
   public static final Long STATUS_ROLE = 758706770675105802L;
