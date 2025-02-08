@@ -43,8 +43,8 @@ public class MessageReceive extends ListenerAdapter {
             Objects.requireNonNull(e.getGuild().getTextChannelById(Constants.WAITING_CHANNEL))
                     .sendMessageEmbeds(embed.build())
                     .setActionRow(
-                            net.dv8tion.jda.api.interactions.components.buttons.Button.success("OK", "Aceitar"),
-                            net.dv8tion.jda.api.interactions.components.buttons.Button.danger("NO", "Negar"),
+                            Button.success("OK", "Aceitar"),
+                            Button.danger("NO", "Negar"),
                             Button.primary("FILA", "Fila")
                                     .withEmoji(Emoji.fromUnicode("🟡")))
                     .queue();
