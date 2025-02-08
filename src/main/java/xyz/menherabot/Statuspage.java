@@ -13,11 +13,11 @@ import org.slf4j.LoggerFactory;
 
 enum ComponentStates {
     operational, partial_outage, major_outage, degraded_performance, under_maintenance
-}
+};
 
 public class Statuspage {
     private static final OkHttpClient client = new OkHttpClient();
-//    public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+    public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     private static final Logger logger = LoggerFactory.getLogger(Statuspage.class);
 
     public static void CheckMessage(Message message) {
