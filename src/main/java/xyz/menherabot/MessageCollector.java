@@ -6,9 +6,11 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.util.Objects;
+
 public class MessageCollector extends ListenerAdapter {
   private final long messageId;
-  private EmbedBuilder embedToSend;
+  private final EmbedBuilder embedToSend;
 
   public MessageCollector(long messageId, EmbedBuilder embedToSend) {
     this.messageId = messageId;
@@ -28,6 +30,6 @@ public class MessageCollector extends ListenerAdapter {
 
     e.getChannel().deleteMessageById(this.messageId).queue();
 
-    e.getGuild().getTextChannelById(Constants.NEGATED_CHANNEL).sendMessageEmbeds(this.embedToSend.build()).queue();
+    Objects.requireNonNull(e.getGuild().getTextChannelById(Constants.NEGATED_CHANNEL)).sendMessageEmbeds(this.embedToSend.build()).queue();
   }
 }
