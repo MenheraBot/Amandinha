@@ -14,10 +14,6 @@ public class InteractionsListener extends ListenerAdapter {
     public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent e) {
         String commandName = e.getName().split(" ")[0];
 
-        if (!e.isFromGuild()) {
-            e.reply("Este comando só pode ser executado no meu servidor de suporte").setEphemeral(true).queue();
-        }
-
         switch (commandName) {
             case "beta" -> new BetaCommand().execute(e);
             case "atualizações" -> new NotifyCommand().execute(e);
