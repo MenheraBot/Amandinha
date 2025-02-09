@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 public class InteractionsListener extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent e) {
-        String commandName = e.getName().split(" ")[0];
+        String commandName = e.getName();
 
         switch (commandName) {
             case "beta" -> new BetaCommand().execute(e);
