@@ -6,13 +6,9 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Nonnull;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class InfoCommand extends ListenerAdapter {
-  @Override
-  public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent e) {
-    if (!e.getName().equals("info"))
-      return;
+public class InfoCommand {
+  public void execute(@Nonnull SlashCommandInteractionEvent e) {
 
     // Thanks to Loritta's code
     // https://github.com/LorittaBot/Loritta/blob/b8502cb667db18cbb18c118924ff22005360a07f/platforms/discord/legacy/src/main/java/com/mrpowergamerbr/loritta/commands/vanilla/discord/BotInfoCommand.kt#L39
@@ -30,6 +26,7 @@ public class InfoCommand extends ListenerAdapter {
 
     Runtime runtime = Runtime.getRuntime();
     int mb = 1024 * 1024;
+    String javaVersion = System.getProperty("java.version");
     long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / mb;
     long freeMemory = runtime.freeMemory() / mb;
     long maxMemory = runtime.maxMemory() / mb;
@@ -40,6 +37,7 @@ public class InfoCommand extends ListenerAdapter {
         + "MB\n> **Memória Disponível:** " + freeMemory
         + "MB\n> **Memória Alocada:** " + totalMemory
         + "MB\n> **Memória Máxima:** " + maxMemory
-        + "MB\n> **Threads Ativas:** " + ManagementFactory.getThreadMXBean().getThreadCount()).queue();
+        + "MB\n> **Threads Ativas:** " + ManagementFactory.getThreadMXBean().getThreadCount()
+        + "\n> **Versão do Java:** " + javaVersion).queue();
   }
 }

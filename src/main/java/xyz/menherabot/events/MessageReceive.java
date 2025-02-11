@@ -11,6 +11,7 @@ import xyz.menherabot.Statuspage;
 import javax.annotation.Nonnull;
 import java.awt.*;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -34,16 +35,16 @@ public class MessageReceive extends ListenerAdapter {
                     .setDescription("**" + e.getMessage().getContentRaw() + "**")
                     .setColor(new Color(new Random().nextInt(0xffffff + 1)))
                     .setThumbnail(e.getAuthor().getAvatarUrl())
-                    .setFooter(new StringBuilder("ID do Usuário: ").append(e.getAuthor().getId()).toString())
+                    .setFooter("ID do Usuário: " + e.getAuthor().getId())
                     .setTimestamp(Instant.now())
-                    .setAuthor(new StringBuilder("Sugestão de ").append(e.getAuthor().getAsTag()).toString(),
+                    .setAuthor("Sugestão de " + e.getAuthor().getAsTag(),
                             e.getAuthor().getAvatarUrl(), e.getAuthor().getAvatarUrl());
 
-            e.getGuild().getTextChannelById(Constants.WAITING_CHANNEL)
+            Objects.requireNonNull(e.getGuild().getTextChannelById(Constants.WAITING_CHANNEL))
                     .sendMessageEmbeds(embed.build())
                     .setActionRow(
-                            net.dv8tion.jda.api.interactions.components.buttons.Button.success("OK", "Aceitar"),
-                            net.dv8tion.jda.api.interactions.components.buttons.Button.danger("NO", "Negar"),
+                            Button.success("OK", "Aceitar"),
+                            Button.danger("NO", "Negar"),
                             Button.primary("FILA", "Fila")
                                     .withEmoji(Emoji.fromUnicode("🟡")))
                     .queue();
@@ -52,10 +53,9 @@ public class MessageReceive extends ListenerAdapter {
 
             if (e.getAuthor().getIdLong() != Constants.MENHERA_BOT_ID) {
                 e.getChannel().sendMessage(
-                        new StringBuilder("Obrigada por me enviar uma sugestão ")
-                                .append(e.getAuthor().getAsMention())
-                                .append("! Minha dona já possui conhecimento dela, e vai averiguar o mais rápido possível. Beijinhos >.<")
-                                .toString())
+                                "Obrigada por me enviar uma sugestão " +
+                                        e.getAuthor().getAsMention() +
+                                        "! Minha dona já possui conhecimento dela, e vai averiguar o mais rápido possível. Beijinhos >.<")
                         .complete().delete().queueAfter(10, TimeUnit.SECONDS);
             }
             return;

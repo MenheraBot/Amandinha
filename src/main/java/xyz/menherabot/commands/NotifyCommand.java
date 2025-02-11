@@ -4,25 +4,24 @@ import javax.annotation.Nonnull;
 
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import xyz.menherabot.Constants;
 
-public class NotifyCommand extends ListenerAdapter {
-  @Override
-  public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent e) {
-    if (!e.getName().equals("atualizações"))
-      return;
+import java.util.Objects;
 
-    Role role = e.getGuild().getRoleById(Constants.NOTIFY_ROLE);
+public class NotifyCommand {
+    public void execute(@Nonnull SlashCommandInteractionEvent e) {
 
-    if (e.getMember().getRoles().contains(role)) {
-      e.getGuild().removeRoleFromMember(e.getMember(), role).queue();
-      e.reply("Como desejar! Você não será mais notificado das atualizações da Menhera!").queue();
-      return;
+        Role role = Objects.requireNonNull(e.getGuild()).getRoleById(Constants.NOTIFY_ROLE);
+
+        if (Objects.requireNonNull(e.getMember()).getRoles().contains(role)) {
+            assert role != null;
+            e.getGuild().removeRoleFromMember(e.getMember(), role).queue();
+            e.reply("Como desejar! Você não será mais notificado das atualizações da Menhera!").queue();
+            return;
+        }
+
+        assert role != null;
+        e.getGuild().addRoleToMember(e.getUser(), role).queue();
+        e.reply("Feitoria! Você será notificado das atualizações da Menhera").queue();
     }
-
-    e.getGuild().addRoleToMember(e.getUser(), role).queue();
-    e.reply("Feitoria! Você será notificado das atualizações da Menhera").queue();
-    return;
-  }
 }
