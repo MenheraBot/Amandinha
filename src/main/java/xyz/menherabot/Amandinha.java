@@ -5,11 +5,8 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import xyz.menherabot.commands.BetaCommand;
-import xyz.menherabot.commands.InfoCommand;
-import xyz.menherabot.commands.NotifyCommand;
-import xyz.menherabot.commands.StatusCommand;
 import xyz.menherabot.events.ButtonInteractionModule;
+import xyz.menherabot.events.InteractionsListener;
 import xyz.menherabot.events.MessageReceive;
 import xyz.menherabot.events.Ready;
 
@@ -25,10 +22,7 @@ public class Amandinha extends ListenerAdapter {
                 .enableIntents(EnumSet.of(GatewayIntent.GUILD_MESSAGES))
                 .addEventListeners(
                         new Amandinha(),
-                        new BetaCommand(),
-                        new NotifyCommand(),
-                        new StatusCommand(),
-                        new InfoCommand(),
+                        new InteractionsListener(),
                         new Ready(),
                         new MessageReceive(),
                         new ButtonInteractionModule())
