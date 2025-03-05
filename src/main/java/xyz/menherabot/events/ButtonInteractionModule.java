@@ -30,6 +30,8 @@ public class ButtonInteractionModule extends ListenerAdapter {
                 .post(body)
                 .build();
 
+        OkHttpClient client = new OkHttpClient();
+
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 System.out.println("Success in suggestion: " + response.body().string());
