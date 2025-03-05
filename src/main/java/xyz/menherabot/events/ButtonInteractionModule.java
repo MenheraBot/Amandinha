@@ -25,7 +25,7 @@ public class ButtonInteractionModule extends ListenerAdapter {
 
         RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
         Request request = new Request.Builder()
-                .url("https://api.menhera.com/main/suggestion")
+                .url("https://api.menherabot.xyz/main/suggestion")
                 .addHeader("Authorization", System.getenv("MENHERA_API_TOKEN"))
                 .post(body)
                 .build();
