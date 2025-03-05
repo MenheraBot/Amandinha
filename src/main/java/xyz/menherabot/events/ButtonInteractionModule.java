@@ -10,13 +10,34 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import xyz.menherabot.Constants;
 import xyz.menherabot.MessageCollector;
 import xyz.menherabot.Statuspage;
-
+import java.util.regex.Matcher;
 import javax.annotation.Nonnull;
 import java.awt.*;
+import okhttp3.*; 
+import java.io.IOException;
+import java.util.regex.Pattern;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class ButtonInteractionModule extends ListenerAdapter {
+    public static void sendPostRequest(String userId) throws IOException {
+        String json = "{\"userId\":\"" + userId + "\"}";
+
+        RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
+        Request request = new Request.Builder()
+                .url("https://api.menhera.com/main/suggestion")
+                .addHeader("Authorization", System.getenv("MENHERA_API_TOKEN"))
+                .post(body)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                System.out.println("Success in suggestion: " + response.body().string());
+            } else {
+                System.out.println("Error in suggestion: " + response.code());
+            }
+        }
+    }
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent e) {
         if (e.getUser().getIdLong() != Constants.OWNER_ID)
             return;
@@ -48,6 +69,22 @@ public class ButtonInteractionModule extends ListenerAdapter {
 
                 if (oldEmbed.getAuthor() != null && oldEmbed.getAuthor().getName() != null)
                     newEmbed.setAuthor(oldEmbed.getAuthor().getName(), oldEmbed.getAuthor().getIconUrl());
+
+                String oldUserId = oldEmbed.getFooter().getText();
+
+                Pattern pattern = Pattern.compile("ID do Usuário: (\\d+)");
+                Matcher matcher = pattern.matcher(oldUserId);
+
+                String userId = null;
+                if (matcher.find()) {
+                    userId = matcher.group(1);
+
+                    try {
+                        sendPostRequest(userId);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
                 assert channel != null;
                 channel.sendMessageEmbeds(newEmbed.build()).queue();
