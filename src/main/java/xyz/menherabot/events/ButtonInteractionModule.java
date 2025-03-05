@@ -83,8 +83,8 @@ public class ButtonInteractionModule extends ListenerAdapter {
 
                     try {
                         sendPostRequest(userId);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    } catch (IOException err) {
+                        err.printStackTrace();
                     }
                 }
 
